@@ -81,6 +81,7 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
 .okq .closing img{width:96px;height:auto;flex:none;display:block}
 .okq footer{padding:18px 40px;border-top:1px solid var(--line);font-family:Montserrat,sans-serif;font-size:13px;color:var(--grey);direction:ltr;text-align:center}
 .okq footer a{color:inherit;text-decoration:none}
+.okq footer .ver{display:block;margin-top:6px;font-size:11px;color:#9AA0A3;direction:rtl}
 .okq .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:okspin .8s linear infinite}
 @media (max-width:640px){
   .okq{padding:0}
@@ -127,7 +128,7 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
     </header>
     <div class="prog" aria-hidden="true"><i id="okBar"></i></div>
     <main id="okApp" aria-live="polite"></main>
-    <footer><a href="https://www.ok1.co.il">www.ok1.co.il</a> | <a href="tel:0722569000">072-256-9000</a> | <a href="tel:0549000787">054-9000-787</a></footer>
+    <footer><a href="https://www.ok1.co.il">www.ok1.co.il</a> | <a href="tel:0722569000">072-256-9000</a> | <a href="tel:0549000787">054-9000-787</a><span class="ver">גרסה 1.3 | 11.11.2026</span></footer>
   </div>
 </div>
 
@@ -135,7 +136,7 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
 (function(){
   "use strict";
   /* התשובות נשלחות למייל דרך FormSubmit (חינם). פעם ראשונה: לאשר את מייל ההפעלה */
-  var ENDPOINT = "https://formsubmit.co/omer@ok1.co.il";
+  var ENDPOINT = "https://formsubmit.co/971a23c1844853387a245520fe0ab3b8"; /* = omer@ok1.co.il (מוסתר) */
   var PASS = 60; /* ציון מינימלי להמלצה "להיפגש" */
   var W = {
     years:{y0:0,y1:1,y3:3,y10:3}, team:{t1:1,t2:2,t6:3,t20:3}, deal:{d1:2,d2:6,d3:10,d4:12},
