@@ -128,15 +128,15 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
     </header>
     <div class="prog" aria-hidden="true"><i id="okBar"></i></div>
     <main id="okApp" aria-live="polite"></main>
-    <footer><a href="https://www.ok1.co.il">www.ok1.co.il</a> | <a href="tel:0722569000">072-256-9000</a> | <a href="tel:0549000787">054-9000-787</a><span class="ver">גרסה 1.3 | 11.11.2026</span></footer>
+    <footer><a href="https://www.ok1.co.il">www.ok1.co.il</a> | <a href="tel:0722569000">072-256-9000</a> | <a href="tel:0549000787">054-9000-787</a><span class="ver">גרסה 1.4 | 11.11.2026</span></footer>
   </div>
 </div>
 
 <script>
 (function(){
   "use strict";
-  /* התשובות נשלחות למייל דרך FormSubmit (חינם). פעם ראשונה: לאשר את מייל ההפעלה */
-  var ENDPOINT = "https://formsubmit.co/971a23c1844853387a245520fe0ab3b8"; /* = omer@ok1.co.il (מוסתר) */
+  /* התשובות נשלחות למייל דרך send.php באחסון של ok1.co.il */
+  var ENDPOINT = "https://ok1.co.il/ok-fit/send.php";
   var PASS = 60; /* ציון מינימלי להמלצה "להיפגש" */
   var W = {
     years:{y0:0,y1:1,y3:3,y10:3}, team:{t1:1,t2:2,t6:3,t20:3}, deal:{d1:2,d2:6,d3:10,d4:12},
@@ -321,8 +321,9 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
     var form = document.createElement("form");
     form.method = "POST"; form.action = ENDPOINT; form.acceptCharset = "UTF-8"; form.style.display = "none";
     fd.forEach(function(val, key){
-      var inp = document.createElement("textarea");
-      inp.name = key; inp.value = val; form.appendChild(inp);
+      var k = document.createElement("textarea"), v = document.createElement("textarea");
+      k.name = "k[]"; k.value = key; v.name = "v[]"; v.value = val;
+      form.appendChild(k); form.appendChild(v);
     });
     document.body.appendChild(form);
     form.submit();
