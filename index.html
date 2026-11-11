@@ -135,7 +135,7 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
 (function(){
   "use strict";
   /* התשובות נשלחות למייל דרך FormSubmit (חינם). פעם ראשונה: לאשר את מייל ההפעלה */
-  var ENDPOINT = "https://formsubmit.co/ajax/omer@ok1.co.il";
+  var ENDPOINT = "https://formsubmit.co/omer@ok1.co.il";
   var PASS = 60; /* ציון מינימלי להמלצה "להיפגש" */
   var W = {
     years:{y0:0,y1:1,y3:3,y10:3}, team:{t1:1,t2:2,t6:3,t20:3}, deal:{d1:2,d2:6,d3:10,d4:12},
@@ -315,13 +315,16 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
     fd.append("מה חשוב שנדע", note || "לא נכתב");
     fd.append("זמן מילוי", Math.floor(secs / 60) + ":" + ("0" + secs % 60).slice(-2) + " דקות");
 
-    fetch(ENDPOINT, {method:"POST", headers:{"Accept":"application/json"}, body:fd})
-      .then(function(r){ return r.json().catch(function(){ return {}; }); })
-      .then(function(j){ if (j && (j.success === true || j.success === "true")) done(); else throw new Error("send"); })
-      .catch(function(){
-        sending = false; btn.disabled = false; btn.innerHTML = 'לנסות שוב <span class="ar">&larr;</span>';
-        err.textContent = "משהו לא עבד בשליחה. נסו שוב, או התקשרו אלינו: 054-9000-787";
-      });
+    var back = location.origin + location.pathname + "?done=1&name=" + encodeURIComponent(c.name.split(" ")[0]) + (BIZ ? "&biz=" + encodeURIComponent(BIZ) : "");
+    fd.append("_next", back);
+    var form = document.createElement("form");
+    form.method = "POST"; form.action = ENDPOINT; form.acceptCharset = "UTF-8"; form.style.display = "none";
+    fd.forEach(function(val, key){
+      var inp = document.createElement("textarea");
+      inp.name = key; inp.value = val; form.appendChild(inp);
+    });
+    document.body.appendChild(form);
+    form.submit();
   }
 
   function rate(){
@@ -377,6 +380,6 @@ body{font-family:var(--f);color:var(--ink);direction:rtl;-webkit-font-smoothing:
     if (n >= 1 && n <= 9){ var b = app.querySelectorAll(".opt")[n - 1]; if (b) b.click(); }
   });
 
-  welcome();
+  if (P.get("done") === "1") { C.name = NAME; done(); } else welcome();
 })();
 </script>
